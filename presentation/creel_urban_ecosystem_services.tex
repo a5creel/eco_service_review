@@ -1,0 +1,429 @@
+% Goal: 10-minute talk on the informal review "The State of Valuing Urban Ecosystem Services"
+% Follows outline.md and manuscript/main.tex section by section. Preamble copied from the ASU JMP deck
+% (PhD Work/green_space_spending/presentations/16_ASU/creel_heat_green_spend.tex).
+% Andie Creel / Started November 2026
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{bookmark}
+
+% Include graphicx package for images
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing}
+\usepackage{adjustbox}
+
+% tables
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl} % \rowcolor for shaded table rows
+
+% citations
+\usepackage{xcolor}
+\usepackage[authoryear]{natbib}
+\bibpunct{%
+    \textcolor{gray}{(}}{%    opening delimiter
+    \textcolor{gray}{)}}{%    closing delimiter
+  \textcolor{gray}{;}}{a}{,}{,}%        separator (gray to match citecolor), mode=a (author–year), punctuation
+\usepackage{hyperref}    % <– actually load hyperref
+\hypersetup{
+  colorlinks   = true,
+  linkcolor    = white,  % internal slide links
+  citecolor    = gray,   % author–year citations (text + gray parens)
+  urlcolor     = blue
+}
+% hyperref (2026) leaves natbib's author-year break as a no-op in beamer, which drops the ", " between author and year
+% (restored here, in gray to match citecolor)
+\makeatletter
+\AtBeginDocument{\def\hyper@natlinkbreak#1#2{\hyper@linkend\textcolor{gray}{#1}\hyper@linkstart{cite}{cite.#2}}}
+\makeatother
+\newcommand{\smallcite}[1]{\begingroup\scriptsize\citep{#1}\endgroup}
+\newcommand{\gt}{>}
+
+
+% Remove colored box from slide headers (frametitle)
+\setbeamertemplate{frametitle}{%
+    \vskip1ex
+    \color{black}\insertframetitle%
+    \vskip1ex
+}
+
+% set block colors
+\setbeamercolor{block title}{bg=gray!40, fg=black}
+\setbeamercolor{block body}{bg=gray!10, fg=black}
+
+
+% Change footer colors to a more aesthetically pleasing black, white, and gray theme
+\setbeamercolor{author in head/foot}{bg=black, fg=white}
+\setbeamercolor{title in head/foot}{bg=darkgray, fg=white}
+\setbeamercolor{date in head/foot}{bg=black, fg=white}
+\setbeamertemplate{itemize items}{-}
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{enumerate item}{fg=black}
+\setbeamercolor{enumerate subitem}{fg=black}
+
+% Customizing the footer
+\setbeamertemplate{footline}
+{
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+        \hspace*{1em}\usebeamerfont{author in head/foot}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.4\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}%
+        \hspace*{1em}\insertframenumber
+        \hspace*{1em}\usebeamerfont{date in head/foot}\insertshortdate\hspace*{1em}
+    \end{beamercolorbox}}%
+    \vskip0pt%
+}
+
+% Remove navigational buttons:
+\setbeamertemplate{navigation symbols}{}
+
+
+% Redefine the title page to remove boxes and set the title color to black
+\setbeamertemplate{title page}{
+  \vbox{}
+  \vfill
+\begin{center}
+        {\usebeamerfont{title}\color{black}\inserttitle\par}
+        \vskip1em
+        {\usebeamerfont{author}\insertauthor\par}
+        \vskip0.5em
+        {\usebeamerfont{date}\insertdate\par}
+        \vskip0.5em
+        {\usebeamerfont{institute}\insertinstitute\par}
+\end{center}
+  \vfill
+}
+
+% Information to be included in the title page
+\title[Valuing Urban Ecosystem Services]{The State of Valuing Urban Ecosystem Services}
+%\subtitle{}
+\author[Andie M. Creel]{Andie M. Creel}
+\date[November 2026]{November 2026} % TODO: full date of talk
+\institute{[Venue]} % TODO: venue
+
+\begin{document}
+
+% --------- Title Page -----------
+\usebackgroundtemplate{
+    \tikz\node[opacity=0.4] {
+        \includegraphics[width=\paperwidth,height=\paperheight]{photos/new_haven_sun_trees.jpg}
+    };
+}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+
+% --------- Motivation -----------
+\usebackgroundtemplate{}
+
+\begin{frame}{Motivation}
+    \begin{itemize}
+        \item Urban natural assets (parks, street trees, wetlands, rivers) provide heat control, cleaner air and water, flood mitigation, a place to recreate, and better physical and mental health \smallcite{keelerSocialecologicalTechnologicalFactors2019,baro_mapping_2016}
+        \pause \item A large and growing literature:
+        \begin{itemize}
+            \item Two recent reviews each cover $>$850 publications \smallcite{veerkampReviewStudiesAssessing2021,maReviewMethodsQuantifying2025}
+            \item Number of studies has been rising for two decades, faster after 2015 \smallcite{maReviewMethodsQuantifying2025}
+            \item Most studied: local temperature regulation (36\% of studies) and recreation (23\%) \smallcite{veerkampReviewStudiesAssessing2021}
+            \item Large, publicly owned natural assets (\textit{e.g.,} parks) are studied most often
+        \end{itemize}
+        \pause \item Yet, it is hard to translate this literature into decisions about urban nature
+    \end{itemize}
+\end{frame}
+
+% --------- Challenges -----------
+
+\begin{frame}{Challenges}
+    \begin{itemize}
+        \item \textbf{No shared definition:} Half of $>$300 reviewed papers never define ``ecosystem service'' \smallcite{tanConceptualFrameworkUntangle2020}
+        \begin{itemize}
+            \item Definitions vary across fields, and within them \smallcite{boydWhatAreEcosystem2007}
+        \end{itemize}
+        \pause \item \textbf{No shared method:} At least 47 methods for quantifying urban ecosystem services \smallcite{maReviewMethodsQuantifying2025}
+        \pause \item \textbf{Benefits are rarely measured:} 59\% of papers quantify ecosystem properties, a minority state the benefit to people, even fewer in dollars \smallcite{veerkampReviewStudiesAssessing2021}
+        \pause \item Why dollars matter:
+        \begin{itemize}
+            \item A city needs them for benefit-cost analysis (trees vs. schools, roads, safety)
+            \item A business needs them to see a private incentive to invest (revenue gains, cost savings)
+            \item A non-profit needs them to tell funders what a dollar spent on nature returns
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------- What is an ecosystem service? -----------
+
+\begin{frame}{Flood prevention is a service in one paper and a benefit in another}
+    \small
+    \centering
+    {\hypersetup{citecolor=black} % black column titles in this table only
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{.19\textwidth} >{\raggedright\arraybackslash}p{.23\textwidth} >{\raggedright\arraybackslash}p{.23\textwidth} >{\raggedright\arraybackslash}p{.23\textwidth}}
+        \toprule
+         & \citeauthor{haines-youngLinksBiodiversityEcosystem2010} (\citeyear{haines-youngLinksBiodiversityEcosystem2010}) & \citeauthor{gomez-baggethunClassifyingValuingEcosystem2013} (\citeyear{gomez-baggethunClassifyingValuingEcosystem2013}) & \citeauthor{boydWhatAreEcosystem2007} (\citeyear{boydWhatAreEcosystem2007}) \\
+        \midrule
+        \rowcolor{gray!15}
+        Wetland & Ecosystem (structure) & & Service \\
+        Water slowing or soaking into soil & Function, and a service because flood control benefits people & Function & Input to services \\
+        \rowcolor{gray!15}
+        Flood control & Why the function counts as a service & Service & Benefit \\
+        \bottomrule
+    \end{tabular}
+    }
+    \raggedright
+
+    \vspace{.5cm}
+    \begin{itemize}
+        \item None of these are fringe: each is cited 2,700--4,200 times on Google Scholar
+    \end{itemize}
+\end{frame}
+
+% three key terms (diagram from manuscript Figure 1)
+\begin{frame}{We Want To Communicate! -- Three Key Terms}
+    \centering
+    \begin{adjustbox}{max width=.8\textwidth, max totalheight=.52\textheight}
+    \begin{tikzpicture}[
+      font=\small,
+      head/.style={draw, fill=gray!20, minimum width=4cm, minimum height=0.9cm, align=center, font=\small\bfseries},
+      def/.style={text width=4cm, align=center, font=\footnotesize\itshape},
+      ex/.style={draw=gray!70, minimum width=4cm, minimum height=1.4cm, align=center},
+      arr/.style={-{Stealth[length=2.5mm]}, thick}
+    ]
+      % Column headers and definitions
+      \node[head] (a) at (0,0)    {Natural asset};
+      \node[head] (s) at (5.2,0)  {Ecosystem function};
+      \node[head] (b) at (10.4,0) {Benefit};
+      \draw[arr] (a) -- (s);
+      \draw[arr] (s) -- (b);
+      \node[def] at (0,-0.85)    {A stock, in its own units};
+      \node[def] at (5.2,-0.85)  {What the asset does or provides};
+      \node[def] at (10.4,-0.85) {Value to people, ideally in dollars};
+      % Example: trees
+      \node[ex] (a1) at (0,-2.2)    {Street trees\\(canopy cover)};
+      \node[ex] (s1) at (5.2,-2.2)  {Cooling};
+      \node[ex] (b1) at (10.4,-2.2) {Energy savings,\\storefront revenue,\\avoided heat illness};
+      \draw[arr] (a1) -- (s1);
+      \draw[arr] (s1) -- (b1);
+      % Example: wetland
+      \node[ex] (a2) at (0,-3.9)    {Wetland\\(acres)};
+      \node[ex] (s2) at (5.2,-3.9)  {Flood prevention};
+      \node[ex] (b2) at (10.4,-3.9) {Flood damage\\avoided};
+      \draw[arr] (a2) -- (s2);
+      \draw[arr] (s2) -- (b2);
+      % Where the literature is
+      \draw[decorate, decoration={brace, mirror, amplitude=6pt}, thick]
+        (-2,-4.8) -- (7.2,-4.8) node[midway, below=8pt] {Most urban studies measure these};
+      \draw[decorate, decoration={brace, mirror, amplitude=6pt}, thick]
+        (8.4,-4.8) -- (12.4,-4.8) node[midway, below=8pt] {Rarely measured in dollars};
+    \end{tikzpicture}
+    \end{adjustbox}
+
+    \raggedright
+    \small
+    \begin{itemize}
+        \pause \item Natural capital accounting puts a dollar value on a unit of the asset, but it is technically hard \smallcite{fenichelNewEra2024}
+        \begin{itemize}
+            \item Measuring benefits perfectly should not be the enemy of measuring them at all!
+        \end{itemize}
+        \pause \item Cultural and spiritual services (\textit{e.g.,} a river's spiritual value) are important, but hard to price \smallcite{maher_economics_2020,boydWhatAreEcosystem2007}; not my focus today
+    \end{itemize}
+\end{frame}
+
+% --------- Established functions -----------
+
+% Optional if time: Keeler et al. Table 1 (manuscript Figure 2)
+% \begin{frame}{Which natural assets provide which functions is well documented}
+%     \centering
+%     \includegraphics[width=.95\textwidth]{../figures/Keeler_table_1.png}
+%     \begin{minipage}{.9\textwidth}
+%         \raggedright
+%         \footnotesize Notes: Table 1 of \citet{keelerSocialecologicalTechnologicalFactors2019}. Their nature-based solutions are my natural assets; their urban ecosystem services are my ecosystem functions.
+%     \end{minipage}
+% \end{frame}
+
+\begin{frame}{Functions are well established, but rarely valued in dollars}
+    \footnotesize
+    \begin{tabular}{>{\raggedright\arraybackslash}p{.14\textwidth} >{\raggedright\arraybackslash}p{.38\textwidth} >{\raggedright\arraybackslash}p{.39\textwidth}}
+        \toprule
+        \textbf{Function} & \textbf{Evidence the function exists} & \textbf{Dollar value of the benefit} \\
+        \midrule
+        Cooling & Greenery lowers peak surface temps 2--9~°C \smallcite{wongGreeneryMitigationAdaptation2021} & \$72/month per 1 °F cooler, Phoenix \smallcite{klaiberItLessHot2017}; \$539M energy savings \smallcite{herisPilotingUrbanEcosystem2021} \\[.2em]
+        Stormwater & Trees and permeable surfaces intercept rainfall \smallcite{veerkampReviewStudiesAssessing2021} & \$425M avoided treatment costs, not flood damage \smallcite{herisPilotingUrbanEcosystem2021} \\[.2em]
+        Air & Trees cut city-wide pollution $<$1\% to 5\% \smallcite{keelerSocialecologicalTechnologicalFactors2019} & \$2.04/month for a neighborhood park, Beijing (bundled) \smallcite{liuLinkingUrbanAir2020} \\[.2em]
+        Recreation & Most U.S. outdoor recreation is local \smallcite{creelNationalValueLocal2026} & \$5--\$6 per local trip, $\approx$\$93B/year \smallcite{creelNationalValueLocal2026} \\[.2em]
+        Health & Losing 100M ash trees $\rightarrow$ 15,080 more cardiovascular deaths \smallcite{donovanRelationshipTreesHuman2013} & \$1.0--\$2.4B/year in avoided heat deaths \smallcite{mcdonaldValueUSUrban2020}; mental health not valued \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{.05cm}
+    \small
+    \begin{itemize}
+        \pause \item Simple methods dominate: value transfer ($\approx$47\%) and cost-based (36\%) \smallcite{maReviewMethodsQuantifying2025}; \$5--\$402 per tree per year \smallcite{keelerSocialecologicalTechnologicalFactors2019}
+        \pause \item $\Rightarrow$ We know these functions exist. What we need: who benefits, and by how much
+    \end{itemize}
+\end{frame}
+
+% --------- Distribution -----------
+
+\begin{frame}{Natural assets are unequally distributed}
+    \begin{itemize}
+        \item Fewer natural assets:
+        \begin{itemize}
+            \item Neighborhoods redlined in the 1930s have $\approx$23\% tree canopy today, best-graded neighborhoods have nearly twice as much (37 U.S. metros) \smallcite{locke_residential_2020}
+            \item Lowest income quartile in New England has 52\% as much nearby protected land as the most affluent \smallcite{simsEnvironmentalJusticeCriteria2022}
+        \end{itemize}
+        \pause \item More heat:
+        \begin{itemize}
+            \item Historically redlined neighborhoods are hotter today \smallcite{hoffmanEffectsHistoricalHousing2020,wilsonUrbanHeatManagement2020,conzelmannLongTermEffectsRedlining2022}
+            \item Black residents are 52\% more likely than white residents to live with little canopy and mostly impervious surface \smallcite{jesdale_racialethnic_2013}
+        \end{itemize}
+        \pause \item How we measure benefits changes who appears to benefit:
+        \begin{itemize}
+            \item Valuing travel time with a replacement wage instead of 1/3 own wage: richest quintile's value per trip goes from 10$\times$ the poorest's to 1.5$\times$ \smallcite{creelNationalValueLocal2026}
+            \item Tree cover where people shop is nearly uncorrelated with customers' income \smallcite{creelValueNatureBasedAdaptation2026}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------- Urban animals -----------
+
+\begin{frame}{Urban animals: the next frontier of ecosystem service measurement}
+    \begin{itemize}
+        \item Big gap: services from animals and insects in cities
+        \begin{itemize}
+            \item Review of 317 papers finds only 2 studies on how animal traits affect a service \smallcite{schwarzUnderstandingBiodiversityecosystemService2017}
+            \item Outside cities: bats and birds control pests \smallcite{frankEconomicImpactsEcosystem2024,noackValueBiodiversityEvidence2025}, wolves cut deer-vehicle collisions 24\% \smallcite{raynorWolvesMakeRoadways2021}
+        \end{itemize}
+        \pause \item Possible urban services:
+        \begin{itemize}
+            \item Coyotes and foxes may keep rats in check $\Rightarrow$ less disease spread \smallcite{boydWhatAreEcosystem2007}
+            \item Vultures in India: their collapse raised death rates $>$4\%, more in cities \smallcite{frankSocialCostsKeystone2023}
+            \item Birding: a newly recognized bird species is worth $\approx$\$277 per visitor \smallcite{wardleRecreationalValueRare2025}
+        \end{itemize}
+        \pause \item \textbf{Challenge:} Satellites can see green space \smallcite{housmanNationalLandCover2023}, but they cannot count foxes
+        \begin{itemize}
+            \item Counting animals takes ground data (\textit{e.g.,} eBird, camera traps) \smallcite{wardleRecreationalValueRare2025,kohlQuantifyingUrbanWildlife2024}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% --------- Building natural assets -----------
+\usebackgroundtemplate{
+    \tikz\node[opacity=0.3] {
+        \includegraphics[width=\paperwidth,height=\paperheight]{photos/park-people-nyc.jpg}
+    };
+}
+
+\begin{frame}
+    \begin{center}
+        \Huge From Measuring Ecosystem Services\\to Building Natural Assets\\
+        \vspace{.5cm}
+        \Large Who has the ability, power, and money to make new urban natural assets?
+    \end{center}
+\end{frame}
+
+\usebackgroundtemplate{}
+
+\begin{frame}{Cities build most new natural assets, often with non-profit partners}
+    \begin{itemize}
+        \item New natural assets come from restoration, conservation, or (for animals) reintroduction
+        \begin{itemize}
+            \item Ex: Urban Resources Initiative in New Haven restores abandoned lots into parks and plants trees with communities \smallcite{chenMoreExtremelyHot2024}
+        \end{itemize}
+        \pause \item Usually the city, often with a non-profit or a business improvement district
+        \begin{itemize}
+            \item Cities own the land (sidewalks, parks), but have limited budgets and coordination frictions with private actors \smallcite{toxopeusReviewingFinancingBarriers2021}
+            \item Private park organizations (mostly non-profits) are $>$40\% of park spending in St. Louis and Detroit \smallcite{tplCityParkFacts2025}
+        \end{itemize}
+        \pause \item Insurers invest where nature lowers their claims
+        \begin{itemize}
+            \item 16 Canadian insurers fund wetland restoration to reduce flood risk \smallcite{kouskyNatureInsuranceInsurance2025}
+            \item Coral reef insurance in Quintana Roo, Mexico \smallcite{schelskeInsuringNaturalEcosystems2021}
+        \end{itemize}
+        \pause \item Barriers to more private money: coordinating public and private financiers, and knowing the private benefit \smallcite{toxopeusReviewingFinancingBarriers2021}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Research can unlock financing by measuring who benefits}
+    \begin{itemize}
+        \item \textbf{Public:} Benefit-cost analysis to win grants or justify municipal budgets
+        \begin{itemize}
+            \item 2023 revisions to Circulars A-4 and A-94 addressed ecosystem services; rescinded, but still good guidance \smallcite{gilligham_reep,sarinskyLegalDynamicsRescinding2025}
+            \item Loss of bats lowers county property tax revenue \$1.2M per year (3.8\%) \smallcite{nakhmurinaFiscalImpactBiodiversity2025}
+        \end{itemize}
+        \pause \item \textbf{Private:} Identify who benefits, and by how much
+        \begin{itemize}
+            \item Tree cover protects storefront revenue from heat. In the southern U.S., avoided losses cover the cost of 10\% tree cover in $\approx$4 years (revenue is not profit) \smallcite{creelValueNatureBasedAdaptation2026}
+            \item Heat lowers retail consumption \smallcite{leeExtremeTemperaturesAdaptation2025} and labor productivity \smallcite{dasguptaHeatStressLabour2024}, trees lower cooling costs \smallcite{herisPilotingUrbanEcosystem2021,hanCoolCitiesValue2024}
+        \end{itemize}
+        \pause \item \textbf{Health is the most untapped private incentive}
+        \begin{itemize}
+            \item Health insurers hold a tremendous amount of money; Medicare and Medicaid are among the largest federal budget items
+            \item Insurers already invest in natural assets that lower risk \smallcite{kouskyNatureInsuranceInsurance2025,schelskeInsuringNaturalEcosystems2021}
+            \item But hospital visits, treatment, and mental health are the benefits we have measured least
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%---- Conclusion  ----
+\usebackgroundtemplate{
+    \tikz\node[opacity=0.25] {
+        \includegraphics[width=\paperwidth,height=\paperheight]{photos/new_haven_sun_trees.jpg}
+    };
+}
+
+\begin{frame}{Conclusion}
+    \begin{itemize}
+        \item Large literature, but no shared definition or method, and benefits are rarely measured in dollars
+        \item Natural asset $\rightarrow$ ecosystem function $\rightarrow$ benefit
+        \item Cooling, stormwater, air, and recreation functions (and their health benefits) are well established
+        \begin{itemize}
+            \item What is missing: who benefits, and by how much
+        \end{itemize}
+        \item Natural assets are unequally distributed across neighborhoods
+        \item Urban animals are a gap, partly because we cannot count them from space
+        \item Importance
+        \begin{itemize}
+            \item Measuring public and private benefits can unlock money to build new natural assets $\rightarrow$ health may be the biggest untapped source
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           QUESTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usebackgroundtemplate{
+    \tikz\node[opacity=0.7] {
+        \includegraphics[width=\paperwidth,height=\paperheight]{photos/green_city.jpg}
+    };
+}
+
+\begin{frame}
+    \begin{center}
+        \Huge Questions?\\
+        \vspace{1em}
+        \normalsize andie.creel@yale.edu
+    \end{center}
+\end{frame}
+
+% ---- References ----
+\usebackgroundtemplate{}
+
+
+\begin{frame}[allowframebreaks]{References}
+    \tiny  % Makes text much smaller; alternatively use \scriptsize or \footnotesize
+    \bibliographystyle{abbrvnat}
+    \bibliography{../references}
+
+\end{frame}
+
+
+\end{document}
